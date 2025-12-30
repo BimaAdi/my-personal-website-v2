@@ -5,6 +5,7 @@ import {
 	HeadContent,
 	Scripts,
 } from "@tanstack/react-router";
+import { Navbar } from "@/components/shared/Navbar";
 // import { TanStackRouterDevtoolsPanel } from "@tanstack/react-router-devtools";
 // import TanStackQueryDevtools from "../integrations/tanstack-query/devtools";
 import appCss from "../styles.css?url";
@@ -44,7 +45,8 @@ function RootDocument({ children }: { children: React.ReactNode }) {
 			<head>
 				<HeadContent />
 			</head>
-			<body>
+			<body className="relative">
+				<Navbar />
 				{children}
 				{/* <TanStackDevtools
 					config={{

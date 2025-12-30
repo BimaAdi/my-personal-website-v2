@@ -1,0 +1,22 @@
+[
+	{
+		"title": "Writing Python code like Typescript",
+		"link": "https://dev.to/bimaadi/writing-python-code-like-typescript-1le",
+		"tags": ["Python", "Typescript"]
+	},
+	{
+		"title": "Membuat Project Python yang mudah untuk dimaintain",
+		"link": "https://dev.to/bimaadi/membuat-project-python-yang-mudah-untuk-dimaintain-442p",
+		"tags": ["Python", "Indonesia"]
+	},
+	{
+		"title": "Make Maintainable Python Project",
+		"link": "https://dev.to/bimaadi/make-maintainable-python-project-4jme",
+		"tags": ["Python"]
+	},
+	{
+		"title": "Integrate Hono with Openapi/Swagger",
+		"link": "https://dev.to/bimaadi/integrate-hono-with-openapiswagger-3dem",
+		"tags": ["Typescript"]
+	}
+]
