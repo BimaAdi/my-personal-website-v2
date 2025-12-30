@@ -6,7 +6,7 @@ export const Route = createFileRoute("/")({ component: App });
 function App() {
 	return (
 		<main>
-			<section className="w-screen min-h-200 grid place-items-center px-2">
+			<section className="w-screen min-h-150 grid place-items-center">
 				<div className="flex flex-col md:flex-row items-center gap-4">
 					<img
 						src={myProfilePicture}
