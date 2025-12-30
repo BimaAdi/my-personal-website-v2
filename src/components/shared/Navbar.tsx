@@ -5,7 +5,7 @@ export const Navbar = () => {
 	const location = useLocation();
 
 	return (
-		<nav className="sticky top-0 z-10 flex justify-between p-4 text-white">
+		<nav className="sticky top-0 z-10 bg-primary flex justify-between p-4 text-white">
 			<h1 className="text-xl font-bold">
 				<Link to="/">Bima Adi</Link>
 			</h1>
