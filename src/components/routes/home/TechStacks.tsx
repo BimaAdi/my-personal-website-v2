@@ -17,7 +17,9 @@ import {
 	SiTypescript,
 } from "react-icons/si";
 import { TbBrandGolang } from "react-icons/tb";
+import { I8n } from "@/components/shared/I8n";
 import useWindowDimension from "@/hooks/useWindowDimension";
+import { useI8nStore } from "@/store/i8n";
 
 const techIconMapping = {
 	react: FaReact,
@@ -83,6 +85,7 @@ const TechStackItem = ({
 
 export const TechStacks = () => {
 	const { width } = useWindowDimension();
+	const lang = useI8nStore((state) => state.lang);
 	const [techs, setTechs] = useState<TechName[]>([
 		"react",
 		"nextjs",
@@ -163,9 +166,13 @@ export const TechStacks = () => {
 				))}
 			</div>
 			<p className="text-white max-w-125 text-justify">
-				And it still growing. I always improve myself to learn new technology.
+				{I8n(lang, {
+					en: "And it still growing. I always improve myself to learn new technology.To be honest it's more important to know when to use it rather than how to use it. (Btw try click the tech icons it will be fun!)",
+					id: "Saya akan selalu meningkatkan diri saya untuk mempelajari teknologi baru. Sejujurnya, yang lebih penting adalah mengetahui kapan menggunakannya daripada bagaimana menggunakannya. (Ngomong-ngomong coba klik ikon teknologi!)",
+				})}
+				{/* And it still growing. I always improve myself to learn new technology.
 				To be honest it's more important to know when to use it rather than how
-				to use it. (Btw try click the tech icons it will be fun!)
+				to use it. (Btw try click the tech icons it will be fun!) */}
 			</p>
 		</section>
 	);
