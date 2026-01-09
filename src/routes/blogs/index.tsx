@@ -2,7 +2,7 @@ import { createFileRoute } from "@tanstack/react-router";
 import { Card } from "@/components/routes/blogs/Card";
 import blogs from "@/data/blogs.json";
 
-export const Route = createFileRoute("/blogs")({
+export const Route = createFileRoute("/blogs/")({
 	component: RouteComponent,
 });
 

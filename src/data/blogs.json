@@ -18,5 +18,10 @@
 		"title": "Integrate Hono with Openapi/Swagger",
 		"link": "https://dev.to/bimaadi/integrate-hono-with-openapiswagger-3dem",
 		"tags": ["Typescript"]
+	},
+	{
+		"title": "Example",
+		"link": "example",
+		"tags": []
 	}
 ]

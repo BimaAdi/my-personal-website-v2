@@ -9,18 +9,20 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as BlogsRouteImport } from './routes/blogs'
 import { Route as SplatRouteImport } from './routes/$'
+import { Route as BlogsRouteRouteImport } from './routes/blogs/route'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as BlogsIndexRouteImport } from './routes/blogs/index'
+import { Route as BlogsExampleRouteImport } from './routes/blogs/example'
 
-const BlogsRoute = BlogsRouteImport.update({
-  id: '/blogs',
-  path: '/blogs',
-  getParentRoute: () => rootRouteImport,
-} as any)
 const SplatRoute = SplatRouteImport.update({
   id: '/$',
   path: '/$',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const BlogsRouteRoute = BlogsRouteRouteImport.update({
+  id: '/blogs',
+  path: '/blogs',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -28,51 +30,66 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const BlogsIndexRoute = BlogsIndexRouteImport.update({
+  id: '/',
+  path: '/',
+  getParentRoute: () => BlogsRouteRoute,
+} as any)
+const BlogsExampleRoute = BlogsExampleRouteImport.update({
+  id: '/example',
+  path: '/example',
+  getParentRoute: () => BlogsRouteRoute,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/blogs': typeof BlogsRouteRouteWithChildren
   '/$': typeof SplatRoute
-  '/blogs': typeof BlogsRoute
+  '/blogs/example': typeof BlogsExampleRoute
+  '/blogs/': typeof BlogsIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/$': typeof SplatRoute
-  '/blogs': typeof BlogsRoute
+  '/blogs/example': typeof BlogsExampleRoute
+  '/blogs': typeof BlogsIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/blogs': typeof BlogsRouteRouteWithChildren
   '/$': typeof SplatRoute
-  '/blogs': typeof BlogsRoute
+  '/blogs/example': typeof BlogsExampleRoute
+  '/blogs/': typeof BlogsIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/$' | '/blogs'
+  fullPaths: '/' | '/blogs' | '/$' | '/blogs/example' | '/blogs/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/$' | '/blogs'
-  id: '__root__' | '/' | '/$' | '/blogs'
+  to: '/' | '/$' | '/blogs/example' | '/blogs'
+  id: '__root__' | '/' | '/blogs' | '/$' | '/blogs/example' | '/blogs/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  BlogsRouteRoute: typeof BlogsRouteRouteWithChildren
   SplatRoute: typeof SplatRoute
-  BlogsRoute: typeof BlogsRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/blogs': {
-      id: '/blogs'
-      path: '/blogs'
-      fullPath: '/blogs'
-      preLoaderRoute: typeof BlogsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
     '/$': {
       id: '/$'
       path: '/$'
       fullPath: '/$'
       preLoaderRoute: typeof SplatRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/blogs': {
+      id: '/blogs'
+      path: '/blogs'
+      fullPath: '/blogs'
+      preLoaderRoute: typeof BlogsRouteRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -82,13 +99,41 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/blogs/': {
+      id: '/blogs/'
+      path: '/'
+      fullPath: '/blogs/'
+      preLoaderRoute: typeof BlogsIndexRouteImport
+      parentRoute: typeof BlogsRouteRoute
+    }
+    '/blogs/example': {
+      id: '/blogs/example'
+      path: '/example'
+      fullPath: '/blogs/example'
+      preLoaderRoute: typeof BlogsExampleRouteImport
+      parentRoute: typeof BlogsRouteRoute
+    }
   }
 }
 
+interface BlogsRouteRouteChildren {
+  BlogsExampleRoute: typeof BlogsExampleRoute
+  BlogsIndexRoute: typeof BlogsIndexRoute
+}
+
+const BlogsRouteRouteChildren: BlogsRouteRouteChildren = {
+  BlogsExampleRoute: BlogsExampleRoute,
+  BlogsIndexRoute: BlogsIndexRoute,
+}
+
+const BlogsRouteRouteWithChildren = BlogsRouteRoute._addFileChildren(
+  BlogsRouteRouteChildren,
+)
+
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  BlogsRouteRoute: BlogsRouteRouteWithChildren,
   SplatRoute: SplatRoute,
-  BlogsRoute: BlogsRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
