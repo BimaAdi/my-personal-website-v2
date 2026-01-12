@@ -1,5 +1,4 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useMemo } from "react";
 import {
 	Container,
 	Hero,
@@ -14,12 +13,8 @@ import {
 	Ul,
 } from "@/client/components/routes/blogs/common";
 import blogPicture from "@/client/components/routes/blogs/sql-vs-nosql-is-bad-comparison/sql-vs-nosql-is-bad-comparison.png";
-import {
-	allLang,
-	defaultLang,
-	I8n,
-	type Lang,
-} from "@/client/components/shared/I8n";
+import { I8n } from "@/client/components/shared/I8n";
+import useBlogsI8n from "@/client/hooks/useBlogsI8n";
 
 export const Route = createFileRoute(
 	"/blogs/sql-vs-nosql-is-bad-comparison/{-$lang}",
@@ -30,9 +25,7 @@ export const Route = createFileRoute(
 function RouteComponent() {
 	const { lang } = Route.useParams();
 
-	const selectedLang = useMemo(() => {
-		return !!lang && allLang.includes(lang) ? lang : defaultLang;
-	}, [lang]) as Lang;
+	const { selectedLang } = useBlogsI8n(lang);
 
 	return (
 		<Container>

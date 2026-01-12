@@ -18,6 +18,7 @@ function RouteComponent() {
 							title={blog.title}
 							link={blog.link}
 							tags={blog.tags}
+							hasMultiLang={blog.has_multi_lang}
 						/>
 					))}
 				</div>

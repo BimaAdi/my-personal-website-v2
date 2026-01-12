@@ -1,9 +1,10 @@
-import { Link, useLocation } from "@tanstack/react-router";
+import { Link, useLocation, useNavigate } from "@tanstack/react-router";
 import { twMerge } from "tailwind-merge";
 import { useI8nStore } from "@/client/store/i8n";
 
 export const Navbar = () => {
 	const location = useLocation();
+	const navigate = useNavigate();
 	const lang = useI8nStore((state) => state.lang);
 	const setLang = useI8nStore((state) => state.setLang);
 
@@ -26,6 +27,16 @@ export const Navbar = () => {
 						className="bg-primary text-white py-1"
 						onChange={(e) => {
 							setLang(e.target.value as "en" | "id");
+							// Match /blogs/hello, /blogs/hai/en, /blogs/hail/id but not /blogs or /blogs/
+							if (
+								/^\/blogs\/(?!$|\s)([^/]+)(?:\/(en|id))?$/.test(
+									location.pathname,
+								)
+							) {
+								navigate({
+									to: `/blogs/${location.pathname.split("/")[2]}/${e.target.value}`,
+								});
+							}
 						}}
 						value={lang}
 						aria-label="Select language"
