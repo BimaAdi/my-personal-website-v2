@@ -51,7 +51,7 @@ export const Navbar = () => {
 				<li>
 					<button
 						type="button"
-						className="px-2 py-2 rounded bg-secondary grid place-items-center"
+						className="px-2 py-2 rounded bg-bgsecondary grid place-items-center"
 						onClick={() => {
 							mode === "dark" ? setMode("light") : setMode("dark");
 						}}

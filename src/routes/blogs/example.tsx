@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import {
+	CodeBlock,
 	Container,
 	Hero,
 	Li,
@@ -79,6 +80,15 @@ function RouteComponent() {
 				</Ol>
 				<Li>Third ordered item</Li>
 			</Ol>
+			<CodeBlock language="javascript">
+				{`function greet(name) {
+  return 'Hello, ' + name + '!';
+}`}
+			</CodeBlock>
+			<CodeBlock language="python">
+				{`def greet(name):
+	return 'Hello, ' + name + '!'`}
+			</CodeBlock>
 		</Container>
 	);
 }

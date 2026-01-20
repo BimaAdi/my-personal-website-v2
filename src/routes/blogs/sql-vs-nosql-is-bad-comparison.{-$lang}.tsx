@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import {
+	CodeBlock,
 	Container,
 	Hero,
 	Li,
@@ -491,28 +492,386 @@ function RouteComponent() {
 				en: (
 					<P>
 						If you compare query of sql database like Mysql and PostgresSql they
-						will have same syntax SELECT * FROM bla bla bla. How about NoSQL
-						database let's say mongodb and redis does query look's similar? it's
-						completely different. mongodb use syntax kinda like javascript
-						db.users.find({"{"}"name":"alice"{"}"}). while redis use key value
-						syntax `Keys alice`. Not only that the way mongodb store data is
-						completely different with redis. mongodb store data on disk while
-						redis on memory. So NoSql need broader category how to categorize
-						even more? I will explain in next section.
+						will have same syntax:
 					</P>
 				),
 				id: (
 					<P>
 						Jika kalian membandingkan query dari database sql misal MySql dan
-						PostgresSql mereka akan memiliki sintaks yang mirip SELECT * FROM
-						bla bla bla. Bagaimana dengan database NoSQL misal mongodb dan redis
-						apakah querynya mirip? tidak ada yang sama. mongodb menggunakan
-						sintaks yang mirip dengan javascript db.users.find({"{"}
-						"name":"alice"{"}"}). sedangkan redis menggunakan sintaks key value
-						`Keys alice`. Tidak hanya itu cara mongodb menyimpan data juga
-						berbeda dengan redis. mongodb menyimpan data di disk sedangkan redis
-						di memory. Jadi NoSql perlu kategori yang lebih luas bagaimana cara
-						mengkategorikan nya? saya akan jelaskan di bagian selanjutnya.
+						PostgresSql mereka akan memiliki sintaks yang sama.
+					</P>
+				),
+			})}
+			<CodeBlock language="sql">
+				{`SELECT * FROM users WHERE name = 'alice';`}
+			</CodeBlock>
+			{I8n(selectedLang, {
+				en: (
+					<P>
+						And how they store data is also similar they both store data on
+						disk.
+					</P>
+				),
+				id: (
+					<P>
+						Dan cara mereka menyimpan data juga mirip keduanya menyimpan data di
+						disk.
+					</P>
+				),
+			})}
+			{I8n(selectedLang, {
+				en: (
+					<P>
+						How about NoSQL database let's say mongodb and redis does query
+						look's same? redis use key value syntax:
+					</P>
+				),
+				id: (
+					<P>
+						Bagaimana dengan database NoSQL misal mongodb dan redis apakah
+						querynya mirip? redis menggunakan sintaks key value:
+					</P>
+				),
+			})}
+			<CodeBlock language="redis">
+				{`SET hello world
+GET hello`}
+			</CodeBlock>
+			{I8n(selectedLang, {
+				en: <P>mongodb use syntax kinda like javascript:</P>,
+				id: <P>mongodb menggunakan sintaks yang mirip dengan javascript:</P>,
+			})}
+			<CodeBlock language="javascript">
+				{`db.users.find({ "name": "alice" })`}
+			</CodeBlock>
+			{I8n(selectedLang, {
+				en: (
+					<P>
+						Not only that the way mongodb store data is completely different
+						with redis. mongodb store data on disk while redis on memory. So
+						NoSql need broader category how to categorize even more? I will
+						explain in next section.
+					</P>
+				),
+				id: (
+					<P>
+						Tidak hanya itu cara mongodb menyimpan data juga berbeda dengan
+						redis. mongodb menyimpan data di disk sedangkan redis di memory.
+						Jadi NoSql perlu kategori yang lebih luas bagaimana cara
+						mengkategorikan nya? selanjutnya akan saya jelaskan di bagian
+						selanjutnya.
+					</P>
+				),
+			})}
+			<Section lvl={1}>
+				{I8n(selectedLang, {
+					en: "Better way to categorize database",
+					id: "Cara yang lebih baik untuk mengkategorikan database",
+				})}
+			</Section>
+			{I8n(selectedLang, {
+				en: (
+					<P>
+						I got inspired from this website called{" "}
+						<Link
+							className="underline"
+							to={"https://db-engines.com/en/ranking" as string}
+						>
+							DB-Engines
+						</Link>{" "}
+						that categorize database based on data model like:
+					</P>
+				),
+				id: (
+					<P>
+						Saya mendapatkan inspirasi dari website bernama{" "}
+						<Link
+							className="underline"
+							to={"https://db-engines.com/en/ranking" as string}
+						>
+							DB-Engines
+						</Link>{" "}
+						yang mengkategorikan database berdasarkan model data seperti:
+					</P>
+				),
+			})}
+			<Section lvl={2}>1. Relational Database</Section>
+			{I8n(selectedLang, {
+				en: (
+					<P>
+						Relational Database is database that implement sql standard. Example
+						of relational database:
+					</P>
+				),
+				id: (
+					<P>
+						Relational Database adalah database yang mengimplementasikan
+						standard sql. Contoh relational database:
+					</P>
+				),
+			})}
+			<Ul>
+				<Li depth={2}>MySql</Li>
+				<Li depth={2}>PostgreSql</Li>
+				<Li depth={2}>SQLite</Li>
+				<Li depth={2}>Microsoft SQL Server</Li>
+			</Ul>
+			<Section lvl={2}>2. Key-Value Store</Section>
+			{I8n(selectedLang, {
+				en: (
+					<P>
+						Key-Value Store is database that store data in key value format.
+						Usually they store data primarily in memory (RAM). Example of
+						key-value store database:
+					</P>
+				),
+				id: (
+					<P>
+						Key-Value Store adalah database yang menyimpan data dalam format key
+						value. Biasanya data disimpan pada memory (RAM). Contoh database
+						key-value store:
+					</P>
+				),
+			})}
+			<Ul>
+				<Li depth={2}>Redis</Li>
+				<Li depth={2}>ValKey</Li>
+				<Li depth={2}>Memcached</Li>
+			</Ul>
+			{I8n(selectedLang, {
+				en: (
+					<P>
+						Advantages of storing data in memory is the access speed is very
+						fast compared to storing on disk. That's why memory is used to store
+						small and temporary data to speed up data access. But the drawback
+						of memory is the size were small. Some key value store database also
+						have TTL (time to live) feature which data will be deleted
+						automatically after certain period.
+					</P>
+				),
+				id: (
+					<P>
+						Kelebihan menyimpan data di memory adalah kecepatan akses data yang
+						sangat cepat dibadingkan menyimpan di disk. Karena itulah kegunaan
+						dari memory dikarenakan besar disk cenderung besar maka komputer
+						menggunakan memory untuk menyimpan data yang kecil dan sementara
+						untuk mempercepat akses data. Namun kekurangan dari memory adalah
+						sizenya kecil. Beberapa key value store database juga memiliki fitur
+						TTL (time to live) yaitu data akan dihapus secara otomatis setelah
+						jangka waktu tertentu.
+					</P>
+				),
+			})}
+			<Section lvl={2}>3. Document Database</Section>
+			{I8n(selectedLang, {
+				en: (
+					<P>
+						Document Database is database that store data in document format
+						(like json). The big difference from other database is it can store
+						diffrent shape of data in same table/document/index. Example of
+						document database:
+					</P>
+				),
+				id: (
+					<P>
+						Document Database adalah database yang menyimpan data dalam format
+						(biasanya json). Perbedaan besar dari database lain adalah dapat
+						menyimpan bentuk data yang berbeda dalam tabel/dokumen/index yang
+						sama. Contoh database document:
+					</P>
+				),
+			})}
+			<Ul>
+				<Li depth={2}>MongoDB</Li>
+				<Li depth={2}>CouchDB</Li>
+				<Li depth={2}>Firebase Firestore</Li>
+			</Ul>
+			{I8n(selectedLang, {
+				en: (
+					<P>
+						Imagine you have to store log from your aplication which is like
+						this:
+					</P>
+				),
+				id: (
+					<P>
+						Bayangkan anda harus menyimpan data hasil log aplikasi seperti ini:
+					</P>
+				),
+			})}
+			<Ul>
+				<Li depth={1}>
+					<CodeBlock language="json">
+						{`{
+  "trace_id": "b7f9e8c2-4a1d-4e2e-9c3a-2f5d8e7b6c1a",
+  "level": "info",
+  "message": "User login successful",
+  "userId": 12345
+}`}
+					</CodeBlock>
+				</Li>
+				<Li depth={1}>
+					<CodeBlock language="json">
+						{`{
+  "trace_id": "a3d2c1b4-5e6f-7a8b-9c0d-1e2f3a4b5c6d",
+  "level": "error",
+  "error": "Database connection failed",
+  "userId": 12345
+}`}
+					</CodeBlock>
+				</Li>
+				<Li depth={1}>
+					<CodeBlock language="json">
+						{`{
+  "trace_id": "f1e2d3c4-b5a6-7890-1234-56789abcdef0",
+  "level": "info",
+  "message": "payment successful",
+  "paymentInfo": {
+	"amount": 100,
+	"currency": "USD"
+  },
+  "userId": 12345
+}`}
+					</CodeBlock>
+				</Li>
+			</Ul>
+			{I8n(selectedLang, {
+				en: (
+					<P>
+						Let's try to store using table like database like relational
+						database
+					</P>
+				),
+				id: (
+					<P>Kita coba simpan menggunakan table seperti database relational</P>
+				),
+			})}
+			<Table
+				head={
+					<>
+						<TableHeader>trace_id</TableHeader>
+						<TableHeader>level</TableHeader>
+						<TableHeader>message</TableHeader>
+						<TableHeader>error</TableHeader>
+						<TableHeader>paymentInfo</TableHeader>
+						<TableHeader>userId</TableHeader>
+					</>
+				}
+				body={
+					<>
+						<TableRow>
+							<TableData>b7f9e8c2-4a1d-4e2e-9c3a-2f5d8e7b6c1a</TableData>
+							<TableData>info</TableData>
+							<TableData>User login successful</TableData>
+							<TableData>-</TableData>
+							<TableData>-</TableData>
+							<TableData>12345</TableData>
+						</TableRow>
+						<TableRow>
+							<TableData>a3d2c1b4-5e6f-7a8b-9c0d-1e2f3a4b5c6d</TableData>
+							<TableData>error</TableData>
+							<TableData>-</TableData>
+							<TableData>Database connection failed</TableData>
+							<TableData>-</TableData>
+							<TableData>12345</TableData>
+						</TableRow>
+						<TableRow>
+							<TableData>f1e2d3c4-b5a6-7890-1234-56789abcdef0</TableData>
+							<TableData>info</TableData>
+							<TableData>payment successful</TableData>
+							<TableData>-</TableData>
+							<TableData>{`{"amount": 100, "currency": "USD"}`}</TableData>
+							<TableData>12345</TableData>
+						</TableRow>
+					</>
+				}
+			/>
+			{I8n(selectedLang, {
+				en: (
+					<P>
+						We can see that some column is blank (-) because not all data has
+						that column. Imagine if you insert new data that have column/key
+						that doesn't exist in this current table, You will lose data from
+						that key. You have to add new column to that table.
+					</P>
+				),
+				id: (
+					<P>
+						Bisa kita lihat beberapa kolom harus dikosongkan (-) karena tida
+						semua data memiliki kolom tersebut. Bayangkan jika ada data baru
+						yang memiliki kolom/key yang tidak ada di table saat ini, Maka anda
+						akan kehilangan data dari key tersebut. Anda harus menambahkan kolom
+						baru ke table tersebut.
+					</P>
+				),
+			})}
+			{I8n(selectedLang, {
+				en: (
+					<P>
+						If we use document database we don't have that problem, you can
+						store the data as it is. document database will add key
+						automatically.
+					</P>
+				),
+				id: (
+					<P>
+						Jika kita menggunakan document database kita tidak akan memiliki
+						masalah tersebut, kita bisa menyimpan data apa adanya. database
+						document akan menambahkan key secara otomatis.
+					</P>
+				),
+			})}
+			{I8n(selectedLang, {
+				en: (
+					<P>
+						But having dynamic key (dynamic schema) also have some drawback.
+						Imagine you use document database to store user data like this
+					</P>
+				),
+				id: (
+					<P>
+						Namun key yang dinamis juga memiliki kekurangan. Bayangkan kita
+						menggunakan document database untuk menyimpan data user seperti ini
+					</P>
+				),
+			})}
+			<CodeBlock language="json">
+				{`{
+  "name": "Alice",
+  "age": 30,
+}`}
+			</CodeBlock>
+			{I8n(selectedLang, {
+				en: <P>Then you got typo name to username when insert new data</P>,
+				id: (
+					<P>
+						Lalu anda salah mengetik name menjadi username ketika menambahkan
+						data baru
+					</P>
+				),
+			})}
+			<CodeBlock language="json">
+				{`{
+  "username": "John",
+  "age": 15,
+}`}
+			</CodeBlock>
+			{I8n(selectedLang, {
+				en: (
+					<P>
+						If you use relational database. The database will reject this input
+						and prevent data malform. In Document Store the data will be
+						accepeted . The moment you query for name the data will not be
+						found. you must fix the code and all malform data.
+					</P>
+				),
+				id: (
+					<P>
+						Jika anda menggunakan relational database. Database akan menolak
+						input dan mencegah inconsistensi data. Jika menggunakan document
+						database data akan tetap diterima dan ketika mencari data
+						berdasarkan name data tidak akan ditemukan. Anda harus memperbaiki
+						kode dan semua data yang salah tersebut.
 					</P>
 				),
 			})}

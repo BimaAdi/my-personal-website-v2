@@ -1,4 +1,10 @@
 import type React from "react";
+import SyntaxHighlighter from "react-syntax-highlighter";
+import {
+	stackoverflowDark,
+	stackoverflowLight,
+} from "react-syntax-highlighter/dist/esm/styles/hljs";
+import { useDarkModeStore } from "@/client/store/darkMode";
 
 export const Container = ({ children }: { children: React.ReactNode }) => {
 	return (
@@ -85,17 +91,19 @@ export const Table = ({
 	body: React.ReactNode;
 }) => {
 	return (
-		<table className="w-full text-left mt-4 overflow-x-scroll">
-			<thead>
-				<tr>{head}</tr>
-			</thead>
-			<tbody>{body}</tbody>
-		</table>
+		<div className="w-full overflow-x-scroll mt-4">
+			<table className="w-full text-left">
+				<thead>
+					<tr>{head}</tr>
+				</thead>
+				<tbody>{body}</tbody>
+			</table>
+		</div>
 	);
 };
 
 export const TableHeader = ({ children }: { children: React.ReactNode }) => {
-	return <th className="px-2 py-1 bg-secondary text-white">{children}</th>;
+	return <th className="px-2 py-1 bg-bgsecondary text-white">{children}</th>;
 };
 
 export const TableRow = ({ children }: { children: React.ReactNode }) => {
@@ -135,4 +143,27 @@ export const Li = ({
 		default:
 			return <li className="">{children}</li>;
 	}
+};
+
+export const CodeBlock = ({
+	children,
+	language,
+}: {
+	children: string;
+	language: string;
+}) => {
+	const mode = useDarkModeStore((state) => state.mode);
+	return (
+		<div className="relative py-1">
+			<span className="absolute top-2 right-2 z-5 bg-bgdark dark:bg-bglight text-white dark:text-textlight text-xs px-2 py-1 rounded">
+				{language}
+			</span>
+			<SyntaxHighlighter
+				language={language}
+				style={mode === "dark" ? stackoverflowDark : stackoverflowLight}
+			>
+				{children.toString()}
+			</SyntaxHighlighter>
+		</div>
+	);
 };

@@ -9,7 +9,7 @@ type DarkModeStore = {
 export const useDarkModeStore = create<DarkModeStore>()(
 	persist(
 		(set) => ({
-			mode: "dark",
+			mode: "light",
 			setMode: (newMode: "light" | "dark") => {
 				set({ mode: newMode });
 			},

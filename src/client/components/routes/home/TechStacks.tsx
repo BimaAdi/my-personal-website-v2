@@ -65,7 +65,7 @@ const TechStackItem = ({
 		<button
 			type="button"
 			onClick={onClick}
-			className="bg-secondary text-center p-2 rounded-lg text-white hover:cursor-pointer"
+			className="bg-bgsecondary text-center p-2 rounded-lg text-white hover:cursor-pointer"
 		>
 			<IconComponent
 				style={{
