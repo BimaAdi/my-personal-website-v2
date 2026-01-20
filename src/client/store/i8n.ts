@@ -2,8 +2,6 @@ import { create } from "zustand";
 import { persist } from "zustand/middleware";
 import type { Lang } from "@/client/components/shared/I8n";
 
-// TODO: internationalization make page blink on load, try change to cookie + SSR
-
 type I8nStore = {
 	lang: Lang;
 	setLang: (newLang: Lang) => void;

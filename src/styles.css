@@ -1,8 +1,16 @@
 @import "tailwindcss";
-
-body {
-	background-color: #002642;
+@custom-variant dark (&:where(.dark, .dark *));
+@theme {
+	--color-bgdark: #002642;
+	--color-bglight: #FEFEFE;
+	--color-textdark: #FFFFFF;
+	--color-textlight: #002642;
 }
+
+/* body {
+	background-color: #002642; // dark background
+	background-color: #FDFDFD; // light background
+} */
 
 .primary {
 	/* deep space blue */

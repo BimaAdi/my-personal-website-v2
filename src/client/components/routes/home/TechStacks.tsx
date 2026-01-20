@@ -152,8 +152,10 @@ export const TechStacks = () => {
 
 	return (
 		<section className="flex flex-col items-center justify-center gap-2 mb-20">
-			<h2 className="text-center text-3xl pb-5 text-white">Tech Stack</h2>
-			<div className="h-0.5 w-3/12 border-b-2 border-white"></div>
+			<h2 className="text-center text-3xl pb-5 text-textlight dark:text-textdark">
+				Tech Stack
+			</h2>
+			<div className="h-0.5 w-3/12 border-b-2 border-textlight dark:border-textdark"></div>
 			<div className="mt-5 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
 				{techs.map((tech, index) => (
 					<TechStackItem
@@ -165,14 +167,11 @@ export const TechStacks = () => {
 					/>
 				))}
 			</div>
-			<p className="text-white max-w-125 text-justify">
+			<p className="text-textlight dark:text-textdark max-w-125 text-justify">
 				{I8n(lang, {
 					en: "And it still growing. I always improve myself to learn new technology.To be honest it's more important to know when to use it rather than how to use it. (Btw try click the tech icons it will be fun!)",
 					id: "Saya akan selalu meningkatkan diri saya untuk mempelajari teknologi baru. Sejujurnya, yang lebih penting adalah mengetahui kapan menggunakannya daripada bagaimana menggunakannya. (Ngomong-ngomong coba klik ikon teknologi!)",
 				})}
-				{/* And it still growing. I always improve myself to learn new technology.
-				To be honest it's more important to know when to use it rather than how
-				to use it. (Btw try click the tech icons it will be fun!) */}
 			</p>
 		</section>
 	);
