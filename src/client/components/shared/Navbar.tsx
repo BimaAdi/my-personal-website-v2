@@ -25,6 +25,9 @@ export const Navbar = () => {
 				>
 					<Link to="/blogs">Blogs</Link>
 				</li>
+				<li className={twMerge(location.pathname === "/cv" ? "underline" : "")}>
+					<Link to="/cv">CV</Link>
+				</li>
 				<li className="flex items-center">
 					<select
 						className="bg-bglight dark:bg-bgdark text-textlight dark:text-textdark py-1"

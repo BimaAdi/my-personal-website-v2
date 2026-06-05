@@ -9,6 +9,7 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as CvRouteImport } from './routes/cv'
 import { Route as SplatRouteImport } from './routes/$'
 import { Route as BlogsRouteRouteImport } from './routes/blogs/route'
 import { Route as ApiRouteRouteImport } from './routes/api/route'
@@ -18,6 +19,11 @@ import { Route as BlogsExampleRouteImport } from './routes/blogs/example'
 import { Route as ApiSplatRouteImport } from './routes/api/$'
 import { Route as BlogsSqlVsNosqlIsBadComparisonChar123LangChar125RouteImport } from './routes/blogs/sql-vs-nosql-is-bad-comparison.{-$lang}'
 
+const CvRoute = CvRouteImport.update({
+  id: '/cv',
+  path: '/cv',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SplatRoute = SplatRouteImport.update({
   id: '/$',
   path: '/$',
@@ -65,6 +71,7 @@ export interface FileRoutesByFullPath {
   '/api': typeof ApiRouteRouteWithChildren
   '/blogs': typeof BlogsRouteRouteWithChildren
   '/$': typeof SplatRoute
+  '/cv': typeof CvRoute
   '/api/$': typeof ApiSplatRoute
   '/blogs/example': typeof BlogsExampleRoute
   '/blogs/': typeof BlogsIndexRoute
@@ -74,6 +81,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/api': typeof ApiRouteRouteWithChildren
   '/$': typeof SplatRoute
+  '/cv': typeof CvRoute
   '/api/$': typeof ApiSplatRoute
   '/blogs/example': typeof BlogsExampleRoute
   '/blogs': typeof BlogsIndexRoute
@@ -85,6 +93,7 @@ export interface FileRoutesById {
   '/api': typeof ApiRouteRouteWithChildren
   '/blogs': typeof BlogsRouteRouteWithChildren
   '/$': typeof SplatRoute
+  '/cv': typeof CvRoute
   '/api/$': typeof ApiSplatRoute
   '/blogs/example': typeof BlogsExampleRoute
   '/blogs/': typeof BlogsIndexRoute
@@ -97,6 +106,7 @@ export interface FileRouteTypes {
     | '/api'
     | '/blogs'
     | '/$'
+    | '/cv'
     | '/api/$'
     | '/blogs/example'
     | '/blogs/'
@@ -106,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/api'
     | '/$'
+    | '/cv'
     | '/api/$'
     | '/blogs/example'
     | '/blogs'
@@ -116,6 +127,7 @@ export interface FileRouteTypes {
     | '/api'
     | '/blogs'
     | '/$'
+    | '/cv'
     | '/api/$'
     | '/blogs/example'
     | '/blogs/'
@@ -127,10 +139,18 @@ export interface RootRouteChildren {
   ApiRouteRoute: typeof ApiRouteRouteWithChildren
   BlogsRouteRoute: typeof BlogsRouteRouteWithChildren
   SplatRoute: typeof SplatRoute
+  CvRoute: typeof CvRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/cv': {
+      id: '/cv'
+      path: '/cv'
+      fullPath: '/cv'
+      preLoaderRoute: typeof CvRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/$': {
       id: '/$'
       path: '/$'
@@ -224,6 +244,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiRouteRoute: ApiRouteRouteWithChildren,
   BlogsRouteRoute: BlogsRouteRouteWithChildren,
   SplatRoute: SplatRoute,
+  CvRoute: CvRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
