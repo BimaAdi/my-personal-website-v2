@@ -1,4 +1,5 @@
 import { Link } from "@tanstack/react-router";
+import { twMerge } from "tailwind-merge";
 import { useI8nStore } from "@/client/store/i8n";
 
 export const Card = ({
@@ -25,14 +26,22 @@ export const Card = ({
 	};
 
 	return (
-		<div className="flex flex-col gap-2 bg-bgsecondary px-6 py-3 rounded-xl text-left text-white">
+		<div className="flex flex-col gap-2 bg-bglightsecondary dark:bg-bgdarksecondary px-6 py-3 rounded-xl text-left text-white">
 			<Link to={getLink()}>
-				<h2 className="text-xl font-bold hover:underline">{title}</h2>
+				<h2 className="text-xl font-bold hover:underline dark:text-textdarksecondary">
+					{title}
+				</h2>
 			</Link>
 			<div className="flex justify-between">
 				<p>
 					{tags.map((item, idx) => (
-						<span key={item} className={idx !== 0 ? "ml-2" : ""}>
+						<span
+							key={item}
+							className={twMerge(
+								idx !== 0 ? "ml-2 " : "",
+								"dark:text-textdarksecondary",
+							)}
+						>
 							#{item}
 						</span>
 					))}

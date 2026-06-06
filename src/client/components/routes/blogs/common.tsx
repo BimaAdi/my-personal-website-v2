@@ -103,7 +103,11 @@ export const Table = ({
 };
 
 export const TableHeader = ({ children }: { children: React.ReactNode }) => {
-	return <th className="px-2 py-1 bg-bgsecondary text-white">{children}</th>;
+	return (
+		<th className="px-2 py-1 bg-bglightsecondary dark:bg-bgdarksecondary text-white dark:text-textdarksecondary">
+			{children}
+		</th>
+	);
 };
 
 export const TableRow = ({ children }: { children: React.ReactNode }) => {

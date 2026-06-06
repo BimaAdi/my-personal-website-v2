@@ -44,7 +44,7 @@ function RouteComponent() {
 				<button
 					type="button"
 					onClick={handlePrint}
-					className="no-print mb-4 inline-flex items-center rounded-lg bg-bgsecondary px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:cursor-pointer hover:opacity-90 focus:outline-none focus:ring-2 focus:ring-bgsecondary focus:ring-offset-2"
+					className="no-print mb-4 inline-flex items-center rounded-lg bg-bglightsecondary dark:bg-bgdarksecondary px-5 py-3 text-sm font-semibold text-white shadow-sm transition hover:-translate-y-0.5 hover:cursor-pointer hover:opacity-90 focus:outline-none focus:ring-2"
 				>
 					Print CV
 				</button>

@@ -20,7 +20,7 @@
     "noUnusedParameters": true,
     "noFallthroughCasesInSwitch": true,
     "noUncheckedSideEffectImports": true,
-    "baseUrl": ".",
+    // "baseUrl": ".", // Deprecation warning on ts 6 won't be used on ts 7
     "paths": {
       "@/*": ["./src/*"]
     }

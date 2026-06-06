@@ -1,10 +1,13 @@
 @import "tailwindcss";
 @custom-variant dark (&:where(.dark, .dark *));
 @theme {
-	--color-bgdark: #002642; /* deep space blue */
+	--color-bgdark: #1C2A38; /* deep navy */
 	--color-bglight: #FEFEFE;
-	--color-bgsecondary: #001b2e;
+	--color-bglightsecondary: #001b2e;
+	--color-bgdarksecondary: #3A4D39;
 	--color-textdark: #FFFFFF;
-	--color-textlight: #002642;
+	--color-textlight: #002642; /* deep space blue */
 	--color-textsecondary: #001b2e; /* perusian blue */
+	--color-textlightsecondary: #001b2e; /* perusian blue */
+	--color-textdarksecondary: #FFFFFF;
 }
