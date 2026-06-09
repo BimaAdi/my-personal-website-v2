@@ -1,0 +1,122 @@
+{
+	"name": "Muhammad Bima Adi Prabowo",
+	"role": "Software Engineer / Fullstack Developer",
+	"location": "Bandung, Indonesia",
+	"summary": "I am a Software Engineer from Bandung, Indonesia with 6 years of working experience, currently working at Quantus Telematika Indonesia. I am excited to explore new technology because it feels like an adventure for me. I think a good software engineer must often explore new technology. New tech always comes every year. If we do not keep up with technology, we will be left behind.",
+	"skills": [
+		{
+			"name": "React",
+			"tech_label": "react"
+		},
+		{
+			"name": "NextJs",
+			"tech_label": "nextjs"
+		},
+		{
+			"name": "Typescript",
+			"tech_label": "typescript"
+		},
+		{
+			"name": "NodeJs",
+			"tech_label": "nodejs"
+		},
+		{
+			"name": "Fastapi",
+			"tech_label": "fastapi"
+		},
+		{
+			"name": "Django",
+			"tech_label": "django"
+		},
+		{
+			"name": "Python",
+			"tech_label": "python"
+		},
+		{
+			"name": "Rust",
+			"tech_label": "rust"
+		},
+		{
+			"name": "Php",
+			"tech_label": "php"
+		},
+		{
+			"name": "Laravel",
+			"tech_label": "laravel"
+		},
+		{
+			"name": "Golang",
+			"tech_label": "golang"
+		},
+		{
+			"name": "PostgreSql",
+			"tech_label": "postgresql"
+		},
+		{
+			"name": "Redis",
+			"tech_label": "redis"
+		},
+		{
+			"name": "Elasticsearch",
+			"tech_label": "elasticsearch"
+		}
+	],
+	"contacts": {
+		"email": "bimaadi419@gmail.com",
+		"phone": "+62 87770106851",
+		"linkedin": "https://www.linkedin.com/in/muhammad-bima-adi-prabowo-0a9847192/",
+		"github": "https://github.com/BimaAdi",
+		"website": "https://www.bimaadi.dev"
+	},
+	"experience": [
+		{
+			"title": "Software Engineer - Full Time at Quantus Telematika Indonesia",
+			"period": "2020 - Present",
+			"description": "Develop and maintain certain projects (AnalitiQ, Asset Management System, Coal Trip, Koperasi). I also do research on new tech stacks and tools to improve team productivity."
+		},
+		{
+			"title": "Backend Developer - Freelance at DOT Indonesia",
+			"period": "Aug 2021 - Dec 2021",
+			"description": "Maintain Sirka health app."
+		},
+		{
+			"title": "Backend Developer - Intern at Lembaga Ilmu Pengetahuan Indonesia",
+			"period": "Sep 2018 - Nov 2018",
+			"description": "Created a web app for Twitter sentiment analysis, including deploying the machine learning model and streaming Twitter (X) data."
+		}
+	],
+	"volunteer": [
+		{
+			"title": "Lead Developer - Website team PyconId Conference 2026",
+			"period": "2026 - Present",
+			"description": "Leading the project team, handling code review, maintaining the timeline, and making technical decisions."
+		},
+		{
+			"title": "Speaker - PyconId Conference 2025",
+			"period": "2025",
+			"description": "Title: Behind the scene website PyconID 2025 (How to maintain Open source Project)."
+		},
+		{
+			"title": "Lead Developer - Website team PyconId Conference 2025",
+			"period": "2025",
+			"description": "Leading the project team, handling code review, maintaining the timeline, and making technical decisions. The project is open source so everyone can contribute and show the spirit of community."
+		},
+		{
+			"title": "Speaker - Pycon APAC Conference 2024",
+			"period": "2024",
+			"description": "Title: How to write python code like typescript."
+		},
+		{
+			"title": "Frontend Developer - Website team Pycon APAC Conference 2024",
+			"period": "2024",
+			"description": "Develop and maintain the frontend for the Pycon APAC 2024 website."
+		}
+	],
+	"education": [
+		{
+			"title": "Bachelor of Computer Science",
+			"period": "2015 - 2019",
+			"description": "Universitas Pendidikan Indonesia (UPI), Bandung."
+		}
+	]
+}

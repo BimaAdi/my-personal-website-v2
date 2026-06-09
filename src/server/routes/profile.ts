@@ -1,4 +1,5 @@
 import { OpenAPIHono } from "@hono/zod-openapi";
+import { getMyProfile } from "../repository/profile";
 import { myProfileSchema } from "../schema/profile";
 
 const profileApp = new OpenAPIHono();
@@ -19,14 +20,10 @@ profileApp.openapi(
 		},
 		tags: ["Profile"],
 	},
-	(c) => {
-		return c.json(
-			{
-				name: "Muhammad Bima Adi Prabowo",
-				role: "Software Engineer / Fullstack Developer",
-			},
-			200,
-		);
+	async (c) => {
+		const myProfile = await getMyProfile();
+
+		return c.json(myProfile, 200);
 	},
 );
 
