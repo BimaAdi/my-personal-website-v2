@@ -7,7 +7,7 @@ const profileApp = new OpenAPIHono();
 profileApp.openapi(
 	{
 		method: "get",
-		path: "/my-profile",
+		path: "/",
 		responses: {
 			200: {
 				description: "Successful response",
