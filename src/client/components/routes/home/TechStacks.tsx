@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import {
 	FaLaravel,
 	FaNodeJs,
@@ -39,16 +39,47 @@ const techIconMapping = {
 	"": null,
 };
 
-type TechName = keyof typeof techIconMapping;
+type TechLabel = Exclude<keyof typeof techIconMapping, "">;
+
+type TechSkill = {
+	name: string;
+	tech_label: string;
+};
+
+type TechItem = {
+	name: string;
+	tech_label: TechLabel | "";
+};
+
+const isTechLabel = (value: string): value is TechLabel =>
+	value in techIconMapping && value !== "";
+
+const buildTechItems = (skills: TechSkill[]) => {
+	const techItems: TechItem[] = skills
+		.filter((skill): skill is TechSkill & { tech_label: TechLabel } =>
+			isTechLabel(skill.tech_label),
+		)
+		.map((skill) => ({
+			name: skill.name,
+			tech_label: skill.tech_label,
+		}));
+
+	techItems.splice(Math.floor(techItems.length / 2), 0, {
+		name: "",
+		tech_label: "",
+	});
+
+	return techItems;
+};
 
 const TechStackItem = ({
-	name,
+	item,
 	onClick = () => {},
 }: {
-	name: TechName;
+	item: TechItem;
 	onClick?: () => void;
 }) => {
-	const IconComponent = techIconMapping[name];
+	const IconComponent = techIconMapping[item.tech_label];
 	if (!IconComponent)
 		return (
 			<div
@@ -77,32 +108,20 @@ const TechStackItem = ({
 				}}
 			/>
 			<p>
-				<b>{name}</b>
+				<b>{item.name}</b>
 			</p>
 		</button>
 	);
 };
 
-export const TechStacks = () => {
+export const TechStacks = ({ skills }: { skills: TechSkill[] }) => {
 	const { width } = useWindowDimension();
 	const lang = useI8nStore((state) => state.lang);
-	const [techs, setTechs] = useState<TechName[]>([
-		"react",
-		"nextjs",
-		"typescript",
-		"nodejs",
-		"fastapi",
-		"django",
-		"python",
-		"",
-		"rust",
-		"php",
-		"laravel",
-		"golang",
-		"postgresql",
-		"redis",
-		"elasticsearch",
-	]);
+	const [techs, setTechs] = useState<TechItem[]>(() => buildTechItems(skills));
+
+	useEffect(() => {
+		setTechs(buildTechItems(skills));
+	}, [skills]);
 
 	const handleTechClick = (index: number) => {
 		// Determine row length based on screen width
@@ -114,37 +133,20 @@ export const TechStacks = () => {
 			rowLength = 5;
 		}
 
-		// Check if the clicked tech is adjacent to the blank space
-		const blankIndex =
-			techs
-				.map((tech, index) => (tech === "" ? index : -1))
-				.filter((i) => i !== -1)[0] + 1;
-		let isSwapable = false;
-		if (index - 1 === blankIndex && blankIndex % rowLength !== 0) {
-			isSwapable = true; // left
-		}
+		const blankIndex = techs.findIndex((tech) => tech.tech_label === "");
+		const blankRow = Math.floor(blankIndex / rowLength);
+		const blankCol = blankIndex % rowLength;
+		const row = Math.floor(index / rowLength);
+		const col = index % rowLength;
+		const isSwapable =
+			(row === blankRow && Math.abs(col - blankCol) === 1) ||
+			(col === blankCol && Math.abs(row - blankRow) === 1);
 
-		if (index + 1 === blankIndex && blankIndex % rowLength !== 1) {
-			isSwapable = true; // right
-		}
-
-		if (index + rowLength === blankIndex && blankIndex - rowLength > 0) {
-			isSwapable = true; // down
-		}
-
-		if (
-			index - rowLength === blankIndex &&
-			blankIndex + rowLength <= techs.length
-		) {
-			isSwapable = true; // up
-		}
-
-		// Swap the clicked tech with the blank space if adjacent
-		if (isSwapable) {
+		if (isSwapable && blankIndex >= 0) {
 			const newTechs = [...techs];
-			[newTechs[index - 1], newTechs[blankIndex - 1]] = [
-				newTechs[blankIndex - 1],
-				newTechs[index - 1],
+			[newTechs[index], newTechs[blankIndex]] = [
+				newTechs[blankIndex],
+				newTechs[index],
 			];
 			setTechs(newTechs);
 		}
@@ -159,10 +161,10 @@ export const TechStacks = () => {
 			<div className="mt-5 grid grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-2">
 				{techs.map((tech, index) => (
 					<TechStackItem
-						key={tech}
-						name={tech}
+						key={`${tech.tech_label}-${index}`}
+						item={tech}
 						onClick={() => {
-							handleTechClick(index + 1);
+							handleTechClick(index);
 						}}
 					/>
 				))}

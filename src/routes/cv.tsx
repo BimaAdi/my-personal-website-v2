@@ -2,12 +2,18 @@ import { createFileRoute } from "@tanstack/react-router";
 import { useRef } from "react";
 import { ExperienceItem } from "@/client/components/routes/cv/ExperienceItem";
 import myProfilePicture from "@/client/components/shared/profile.jpeg";
+import { profileServerFn } from "@/server/serverFn/profile";
 
 export const Route = createFileRoute("/cv")({
 	component: RouteComponent,
+	loader: async () => {
+		const profile = await profileServerFn();
+		return { profile };
+	},
 });
 
 function RouteComponent() {
+	const { profile } = Route.useLoaderData();
 	const targetRef = useRef<HTMLDivElement>(null);
 
 	const handlePrint = () => {
@@ -65,15 +71,15 @@ function RouteComponent() {
 						/>
 						<div>
 							<h1 className="text-2xl font-bold sm:text-3xl dark:text-white">
-								Muhammad Bima Adi Prabowo
+								{profile.name}
 							</h1>
 							<p className="text-sm text-slate-700 dark:text-slate-300">
-								Software Engineer / Fullstack Developer
+								{profile.role}
 							</p>
 						</div>
 					</div>
 					<div className="text-sm text-slate-700 dark:text-slate-300">
-						<p>Bandung, Indonesia</p>
+						<p>{profile.location}</p>
 						{/* <p>Open to remote opportunities</p> */}
 					</div>
 				</div>
@@ -85,12 +91,7 @@ function RouteComponent() {
 							About
 						</h2>
 						<p className="text-sm leading-6 text-slate-700 dark:text-slate-300">
-							I am Software Engineer from Bandung Indonesia with 6 years working
-							experience, currently work at Quantus Telematika Indonesia. I am
-							exicited to explore new technology, it&apos;s feels like adventure
-							for me. I think a good software engineer must often explore new
-							technology. New tech always come every year. If we don&apos;t keep
-							up with technology, we will leave behind.
+							{profile.summary}
 						</p>
 					</section>
 
@@ -100,27 +101,12 @@ function RouteComponent() {
 							Skills
 						</h2>
 						<div className="flex flex-wrap gap-2 text-sm">
-							{[
-								"React",
-								"NextJs",
-								"Typescript",
-								"NodeJs",
-								"Fastapi",
-								"Django",
-								"Python",
-								"Rust",
-								"Php",
-								"Laravel",
-								"Golang",
-								"PostgreSql",
-								"Redis",
-								"Elasticsearch",
-							].map((skill) => (
+							{profile.skills.map((skill) => (
 								<span
-									key={skill}
+									key={skill.tech_label}
 									className="rounded-full bg-slate-200 px-3 py-1 text-slate-800 dark:bg-slate-700 dark:text-slate-100"
 								>
-									{skill}
+									{skill.name}
 								</span>
 							))}
 						</div>
@@ -132,14 +118,11 @@ function RouteComponent() {
 							Contacts
 						</h2>
 						<div className="grid gap-2 text-sm text-slate-700 dark:text-slate-300 sm:grid-cols-2">
-							<p>Email: bimaadi419@gmail.com</p>
-							<p>Phone: +62 87770106851</p>
-							<p>
-								LinkedIn:
-								https://www.linkedin.com/in/muhammad-bima-adi-prabowo-0a9847192/
-							</p>
-							<p>GitHub: github.com/BimaAdi</p>
-							<p>Personal Website: https://www.bimaadi.dev</p>
+							<p>Email: {profile.contacts.email}</p>
+							<p>Phone: {profile.contacts.phone}</p>
+							<p>LinkedIn: {profile.contacts.linkedin}</p>
+							<p>GitHub: {profile.contacts.github}</p>
+							<p>Personal Website: {profile.contacts.website}</p>
 						</div>
 					</section>
 
@@ -149,21 +132,14 @@ function RouteComponent() {
 							Experience
 						</h2>
 						<div className="space-y-4 text-sm">
-							<ExperienceItem
-								title="Software Engineer - Full Time at Quantus Telematika Indonesia"
-								period="2020 - Present"
-								description="Develop and Maintain certain Project (AnalitiQ, Asset Management System, Coal Trip, Koperasi). I also have task to do some research on new tech stack and tools to improve our team productivity"
-							/>
-							<ExperienceItem
-								title="Backend Developer - Freelance at DOT Indonesia"
-								period="Aug 2021 - Dec 2021"
-								description="Maintain Sirka health app"
-							/>
-							<ExperienceItem
-								title="Backend Developer - Intern at Lembaga Ilmu Pengetahuan Indonesia"
-								period="Sep 2018 - Nov 2018"
-								description="Create Web App for twitter sentiment analysis (deploy machine learning model and stream twitter (X))"
-							/>
+							{profile.experience.map((item) => (
+								<ExperienceItem
+									key={`${item.title}-${item.period}`}
+									title={item.title}
+									period={item.period}
+									description={item.description}
+								/>
+							))}
 						</div>
 					</section>
 
@@ -173,31 +149,14 @@ function RouteComponent() {
 							Volunteer
 						</h2>
 						<div className="space-y-4 text-sm">
-							<ExperienceItem
-								title="Lead Developer - Website team PyconId Conference 2026"
-								period="2026 - Present"
-								description="Leading project team, code review, maintain timeline and tech decision"
-							/>
-							<ExperienceItem
-								title="Speaker - PyconId Conference 2025"
-								period="2025"
-								description="Title: Behind the scene website PyconID 2025 (How to maintain Open source Project)"
-							/>
-							<ExperienceItem
-								title="Lead Developer - Website team PyconId Conference 2025"
-								period="2025"
-								description="Leading project team, code review, maintain timeline and tech decision. The project is open source so everyone can contribute to show the spirit of community"
-							/>
-							<ExperienceItem
-								title="Speaker - Pycon APAC Conference 2024"
-								period="2024"
-								description="Title: How to write python code like typescript"
-							/>
-							<ExperienceItem
-								title="Frontend Developer - Website team Pycon APAC Conference 2024"
-								period="2024"
-								description="Develop and maintain frontend for website Pycon APAC 2024"
-							/>
+							{profile.volunteer.map((item) => (
+								<ExperienceItem
+									key={`${item.title}-${item.period}`}
+									title={item.title}
+									period={item.period}
+									description={item.description}
+								/>
+							))}
 						</div>
 					</section>
 
@@ -207,11 +166,14 @@ function RouteComponent() {
 							Education
 						</h2>
 						<div className="space-y-4 text-sm">
-							<ExperienceItem
-								title="Bachelor of Computer Science"
-								period="2015 - 2019"
-								description="Universitas Pendidikan Indonesia (UPI), Bandung."
-							/>
+							{profile.education.map((item) => (
+								<ExperienceItem
+									key={`${item.title}-${item.period}`}
+									title={item.title}
+									period={item.period}
+									description={item.description}
+								/>
+							))}
 						</div>
 					</section>
 				</div>
